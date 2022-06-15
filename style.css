@@ -1,38 +1,144 @@
-html {
-  width: 100vw;
-  height: 100vh; }
+@font-face {
+  font-family: simpsonsFont;
+  src: url(/assets/simpsonFont.ttf); }
 
-.play {
-  display: flex;
-  column-gap: 50px;
+body {
+  width: 100vw;
   height: 100vh;
+  margin: 0; }
+
+main {
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center; }
 
-.divLetters {
-  width: 70px;
-  height: 70px;
-  border: 3px solid violet;
-  background-image: url("/assets/img/error_homero.jpg");
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-image: url(/assets/img/Los-Simpson-Wallpapers-4-700x394.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
   background-position: center;
+  background-size: contain; }
+  .menu__divMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    row-gap: 20px;
+    height: 700px;
+    width: 1250px; }
+    .menu__divMenu__btns {
+      font-family: simpsonsFont;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 25px;
+      margin-right: 5%;
+      cursor: pointer;
+      border: none; }
+    .menu__divMenu__alternativeBox {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 10px;
+      font-family: simpsonsFont;
+      padding: 15px;
+      margin-right: 5%;
+      border-radius: 10px;
+      width: min-content;
+      height: min-content;
+      background-image: url(/assets/img/fondo-nubes.jpg);
+      background-repeat: no-repeat;
+      background-size: cover; }
+      .menu__divMenu__alternativeBox__boxOptions {
+        display: flex;
+        justify-content: center;
+        column-gap: 15px; }
+        .menu__divMenu__alternativeBox__boxOptions__btns {
+          font-family: simpsonsFont;
+          padding: 5px;
+          border-radius: 10px;
+          font-size: 15px;
+          cursor: pointer;
+          border: none; }
+      .menu__divMenu__alternativeBox__input {
+        font-family: simpsonsFont;
+        width: 100%;
+        border-radius: 10px;
+        border: none;
+        font-size: 40px;
+        text-align: center; }
+      .menu__divMenu__alternativeBox__msg {
+        color: #831414;
+        text-align: center;
+        font-weight: 700;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; }
+
+.play {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50px; }
-
-.letter {
-  width: 50px;
-  height: 50px;
-  border: none;
-  text-align: center;
-  font-size: 40px;
-  font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  border-radius: 50px;
-  text-transform: uppercase;
-  background-color: transparent; }
+  background-image: url(/assets/img/fondo-nubes.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; }
+  .play__divPlay {
+    height: 700px;
+    width: 1250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    .play__divPlay__divCounter {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 20px; }
+      .play__divPlay__divCounter__text {
+        font-family: simpsonsFont;
+        font-size: 30px;
+        margin: 0; }
+      .play__divPlay__divCounter__num {
+        font-family: simpsonsFont;
+        font-size: 40px;
+        margin: 0; }
+    .play__divPlay__divLetters {
+      display: flex;
+      column-gap: 30px; }
+      .play__divPlay__divLetters__letters {
+        width: 80px;
+        height: 80px;
+        border: 3px solid violet;
+        background-image: url("/assets/img/error_homero.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px; }
+        .play__divPlay__divLetters__letters__inputLetter {
+          width: 65px;
+          height: 65px;
+          border: none;
+          text-align: center;
+          font-size: 40px;
+          font-weight: 600;
+          font-family: simpsonsFont;
+          border-radius: 50px;
+          text-transform: uppercase;
+          background-color: transparent; }
+    .play__divPlay__divActions {
+      display: flex;
+      margin-top: 30px;
+      column-gap: 20px; }
+      .play__divPlay__divActions__btns {
+        font-family: simpsonsFont;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer; }
 
 .okLetter {
   background-color: #ffff98;
@@ -45,9 +151,30 @@ html {
   transition: 2s;
   pointer-events: none; }
 
-.menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 100px; }
+.fade-out {
+  opacity: 0;
+  transition: 1s; }
+
+.animationFadeIn {
+  animation-name: fade-in;
+  animation-duration: 1s;
+  opacity: 1; }
+
+.animationWin {
+  animation-name: fade-in-zoom;
+  animation-duration: 1.5s;
+  font-size: 40px; }
+
+@keyframes fade-in {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes fade-in-zoom {
+  from {
+    opacity: 0;
+    font-size: 100px; }
+  to {
+    opacity: 1;
+    font-size: 40px; } }
