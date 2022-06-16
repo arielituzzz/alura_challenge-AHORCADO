@@ -1,0 +1,129 @@
+.play {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/assets/img/fondo-nubes.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  &__divPlay {
+    height: 700px;
+    width: 1250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &__divCounter {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 20px;
+      &__text {
+        font-family: simpsonsFont;
+        font-size: 40px;
+        margin: 0;
+        color: $yellowSimpsons;
+        text-shadow: 1px 1px 2px black;
+      }
+      &__num {
+        font-family: simpsonsFont;
+        font-size: 40px;
+        margin: 0;
+        color: $yellowSimpsons;
+        text-shadow: 1px 1px 2px black;
+      }
+      &__boxWin {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @extend .animationFadeIn;
+        &__msgWin {
+          margin: 0;
+          font-size: 100px;
+          font-family: simpsonsFont;
+          color: $greenSimpsons;
+          text-shadow: 1px 1px 30px whitesmoke;
+        }
+      }
+      &__textLose {
+        margin: 0;
+        font-family: simpsonsFont;
+        font-size: 70px;
+        color: $redSimpsons;
+        text-shadow: 1px 1px 50px whitesmoke;
+      }
+    }
+    &__divLetters {
+      display: flex;
+      column-gap: 30px;
+      &__letters {
+        width: 80px;
+        height: 80px;
+        border: 3px solid violet;
+        background-image: url("/assets/img/error_homero.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        &__inputLetter {
+          width: 65px;
+          height: 65px;
+          border: none;
+          text-align: center;
+          font-size: 40px;
+          font-weight: 600;
+          font-family: simpsonsFont;
+          border-radius: 50px;
+          text-transform: uppercase;
+          background-color: transparent;
+        }
+      }
+    }
+
+    &__boxLose {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      &__msgLose {
+        margin: 0;
+        font-size: 60px;
+        color: #fed90f;
+        text-shadow: 1px 1px 2px black;
+        font-family: simpsonsFont;
+      }
+      &__wordLose {
+        font-family: simpsonsFont;
+        animation-name: fade-in;
+        animation-duration: 2s;
+        margin: 0;
+        font-size: 100px;
+        text-shadow: 1px 1px 10px rgb(138, 51, 51);
+      }
+    }
+    &__divActions {
+      display: flex;
+      margin-top: 30px;
+      column-gap: 20px;
+      &__btns {
+        font-family: simpsonsFont;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        color: $greySimpsons;
+        border: none;
+      }
+      &__btns:hover {
+        background: linear-gradient(white, $yellowSimpsons);
+        box-shadow: 1px 1px 30px $yellowSimpsons;
+      }
+    }
+  }
+}

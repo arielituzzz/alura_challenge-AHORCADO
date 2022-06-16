@@ -39,7 +39,9 @@ function addWord(word) {
 }
 
 function randomWord() {
-  var wordX = words[Math.floor(Math.random() * words.length)].split("");
+  var word = words[Math.floor(Math.random() * words.length)];
+  var lettersWord = word.split("");
+  var wordX = { complete: word, letters: lettersWord };
   return wordX;
 }
 const regExpMayus = /[A-Zá-ýÁ-Ý]/g;
@@ -53,7 +55,7 @@ play.classList.add("play");
 
 var counter = 0;
 var hits = 0;
-var lifes = 3;
+var lifes = 5;
 
 var msgRegExpOk =
   "Hasta 9 letras en minuscula (no se admite numeros ni caracteres especiales)";
@@ -63,7 +65,7 @@ var msgRegExpFail = "Ingresaste mal uno o varios caracteres";
 //-------------SECCION MENU------------------
 var btnStart = document.createElement("button");
 btnStart.classList.add("menu__divMenu__btns");
-btnStart.textContent = "COMENZAR A JUGAR!";
+btnStart.textContent = "COMENZAR!";
 btnStart.onclick = playing;
 var btnAddWord = document.createElement("button");
 btnAddWord.classList.add("menu__divMenu__btns");
@@ -102,6 +104,34 @@ divInputWord.appendChild(boxBtnsWord);
 divInputWord.appendChild(inputWord);
 divInputWord.appendChild(messageRegexp);
 //-----------------------------------------------
+
+function win() {
+  var boxWin = document.createElement("div");
+  boxWin.classList.add("play__divPlay__divCounter__boxWin");
+  var msgWin = document.createElement("p");
+  msgWin.classList.add("play__divPlay__divCounter__boxWin__msgWin");
+  msgWin.textContent = "GANASTE!!!";
+  boxWin.appendChild(msgWin);
+  return boxWin;
+}
+
+function lose(word) {
+  var textLose = document.createElement("p");
+  textLose.classList.add("play__divPlay__divCounter__textLose");
+  textLose.textContent = "PERDISTE";
+  var boxLose = document.createElement("div");
+  boxLose.classList.add("play__divPlay__boxLose");
+  var msgLose = document.createElement("p");
+  msgLose.classList.add("play__divPlay__boxLose__msgLose");
+  msgLose.textContent = "El personaje es";
+  var wordLose = document.createElement("p");
+  wordLose.classList.add("play__divPlay__boxLose__wordLose");
+  wordLose.textContent = word;
+  boxLose.appendChild(msgLose);
+  boxLose.appendChild(wordLose);
+  var userLose = { msg: textLose, answer: boxLose };
+  return userLose;
+}
 
 function backToMenu() {
   play.classList.add("fade-out");
@@ -166,7 +196,7 @@ function changeAction() {
     menu.removeChild(menu.firstChild);
   }
 
-  lifes = 3;
+  lifes = 5;
   hits = 0;
 }
 
@@ -184,12 +214,12 @@ function playing() {
     var divPlay = document.createElement("div");
     divPlay.classList.add("play__divPlay");
     var word = randomWord();
-    console.log(word);
+    console.log(word.complete);
     var divCounter = document.createElement("div");
     divCounter.classList.add("play__divPlay__divCounter");
     var textCounter = document.createElement("p");
     textCounter.classList.add("play__divPlay__divCounter__text");
-    textCounter.textContent = "Oportunidades restantes";
+    textCounter.textContent = "Oportunidades";
     var numCounter = document.createElement("p");
     numCounter.classList.add("play__divPlay__divCounter__num");
     numCounter.textContent = lifes;
@@ -207,7 +237,8 @@ function playing() {
     play.appendChild(divPlay);
     main.appendChild(play);
 
-    word.forEach(function (letter) {
+    word.letters.forEach(function (letter) {
+      var regExpLetter = new RegExp(letter, "i");
       var letters = document.createElement("div");
       letters.classList.add("play__divPlay__divLetters__letters");
       var inputLetter = document.createElement("input");
@@ -218,19 +249,18 @@ function playing() {
       inputLetter.autocomplete = "off";
       letters.appendChild(inputLetter);
       divLetters.appendChild(letters);
-      var regExpLetter = new RegExp(letter, "i");
+
       inputLetter.oninput = function () {
-        if (lifes >= 1) {
+        if (lifes > 1) {
           if (regExpLetter.test(inputLetter.value)) {
             inputLetter.classList.add("okLetter");
             hits++;
-
-            console.log(hits);
-            console.log("letra correcta!");
+            // console.log(hits);
+            // console.log("letra correcta!");
           } else {
             inputLetter.classList.add("errorLetter");
-            console.log(hits);
-            console.log("letra incorrecta!");
+            // console.log(hits);
+            // console.log("letra incorrecta!");
             if (lifes >= 1) {
               lifes--;
               numCounter.textContent = lifes;
@@ -240,16 +270,31 @@ function playing() {
               inputLetter.classList.remove("errorLetter");
               inputLetter.classList.remove("okLetter");
               inputLetter.value = "";
-            }, 2000);
+            }, 1000);
           }
 
-          if (word.length == hits) {
-            divCounter.textContent = `GANASTE!!!`;
-            divCounter.classList.add("animationWin");
+          if (word.letters.length == hits) {
+            while (divCounter.firstChild) {
+              divCounter.removeChild(divCounter.firstChild);
+            }
+            divCounter.appendChild(win());
+            // divCounter.textContent = `GANASTE!!!`;
+            // divCounter.classList.add("animationWin");
+            btnPlayAgain.focus();
           }
         } else {
-          inputLetter.classList.add("errorLetter");
-          divCounter.textContent = `PERDISTE LA PARTIDA`;
+          inputLetter.disabled = true;
+          btnPlayAgain.focus();
+          var lettersNodes = divLetters.childNodes;
+          lettersNodes.forEach(function (lettersEnable) {
+            var inputs = lettersEnable.firstChild;
+            inputs.disabled = true;
+          });
+          divPlay.appendChild(lose(word.complete).answer);
+          while (divCounter.firstChild) {
+            divCounter.removeChild(divCounter.firstChild);
+          }
+          divCounter.appendChild(lose().msg);
         }
       };
     });

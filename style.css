@@ -2,16 +2,19 @@
   font-family: simpsonsFont;
   src: url(/assets/simpsonFont.ttf); }
 
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0; }
+@keyframes fade-in {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
 
-main {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+@keyframes fade-in-zoom {
+  from {
+    opacity: 0;
+    font-size: 100px; }
+  to {
+    opacity: 1;
+    font-size: 40px; } }
 
 .menu {
   display: flex;
@@ -36,7 +39,11 @@ main {
       font-size: 25px;
       margin-right: 5%;
       cursor: pointer;
-      border: none; }
+      border: none;
+      color: #424f46; }
+    .menu__divMenu__btns:hover {
+      background: linear-gradient(white, #fed90f);
+      box-shadow: 1px 1px 30px #fed90f; }
     .menu__divMenu__alternativeBox {
       display: flex;
       flex-direction: column;
@@ -97,12 +104,33 @@ main {
       margin-bottom: 20px; }
       .play__divPlay__divCounter__text {
         font-family: simpsonsFont;
-        font-size: 30px;
-        margin: 0; }
+        font-size: 40px;
+        margin: 0;
+        color: #fed90f;
+        text-shadow: 1px 1px 2px black; }
       .play__divPlay__divCounter__num {
         font-family: simpsonsFont;
         font-size: 40px;
-        margin: 0; }
+        margin: 0;
+        color: #fed90f;
+        text-shadow: 1px 1px 2px black; }
+      .play__divPlay__divCounter__boxWin {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; }
+        .play__divPlay__divCounter__boxWin__msgWin {
+          margin: 0;
+          font-size: 100px;
+          font-family: simpsonsFont;
+          color: #11bb66;
+          text-shadow: 1px 1px 30px whitesmoke; }
+      .play__divPlay__divCounter__textLose {
+        margin: 0;
+        font-family: simpsonsFont;
+        font-size: 70px;
+        color: #f14e28;
+        text-shadow: 1px 1px 50px whitesmoke; }
     .play__divPlay__divLetters {
       display: flex;
       column-gap: 30px; }
@@ -129,6 +157,25 @@ main {
           border-radius: 50px;
           text-transform: uppercase;
           background-color: transparent; }
+    .play__divPlay__boxLose {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px; }
+      .play__divPlay__boxLose__msgLose {
+        margin: 0;
+        font-size: 60px;
+        color: #fed90f;
+        text-shadow: 1px 1px 2px black;
+        font-family: simpsonsFont; }
+      .play__divPlay__boxLose__wordLose {
+        font-family: simpsonsFont;
+        animation-name: fade-in;
+        animation-duration: 2s;
+        margin: 0;
+        font-size: 100px;
+        text-shadow: 1px 1px 10px #8a3333; }
     .play__divPlay__divActions {
       display: flex;
       margin-top: 30px;
@@ -138,24 +185,40 @@ main {
         padding: 10px;
         border-radius: 10px;
         font-size: 20px;
-        cursor: pointer; }
+        cursor: pointer;
+        color: #424f46;
+        border: none; }
+      .play__divPlay__divActions__btns:hover {
+        background: linear-gradient(white, #fed90f);
+        box-shadow: 1px 1px 30px #fed90f; }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0; }
+
+main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 .okLetter {
   background-color: #ffff98;
   pointer-events: none; }
 
 .errorLetter {
-  color: red;
+  color: #f14e28;
   background-color: #f84646;
   opacity: 0;
-  transition: 2s;
+  transition: 1s;
   pointer-events: none; }
 
 .fade-out {
   opacity: 0;
   transition: 1s; }
 
-.animationFadeIn {
+.animationFadeIn, .play__divPlay__divCounter__boxWin {
   animation-name: fade-in;
   animation-duration: 1s;
   opacity: 1; }
@@ -164,17 +227,3 @@ main {
   animation-name: fade-in-zoom;
   animation-duration: 1.5s;
   font-size: 40px; }
-
-@keyframes fade-in {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-
-@keyframes fade-in-zoom {
-  from {
-    opacity: 0;
-    font-size: 100px; }
-  to {
-    opacity: 1;
-    font-size: 40px; } }
